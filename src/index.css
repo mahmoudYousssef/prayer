@@ -1,68 +1,213 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* الأساسيات - محفوظة كما هي */
+* {
+  padding: 0;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  box-sizing: border-box;
+  font-family: "Cairo", sans-serif;
+}
+
+html,body {
+  direction: rtl;
+  
+}
+
+section {
+  background: url(./assets/bg.jpg) no-repeat center/cover;
   min-height: 100vh;
+  display: flex;
+  align-items: end;
+  padding: 10px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* تحسينات الحاوية */
+section .container {
+  width: 650px;
+  max-width: 100%; /* للتجاوب */
+  padding: 30px 25px;
+  backdrop-filter: blur(5px); /* تقليل الطمس لتحسين الأداء */
+  background: rgba(51, 42, 34, 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba(215, 215, 215, 0.3);
+  margin-right: 15%;
+  transition: all 0.3s ease;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* القسم العلوي - محافظ على الترتيب الأصلي */
+section .top-sec {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(215, 215, 215, 0.3);
+
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+section .top-sec select {
+  width: 250px;
+  border-radius: 5px;
+  outline: none;
+  background: rgba(165, 79, 58, 0.9);
+  padding: 8px 12px;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 10px;
+  border: none;
+  transition: background 0.3s;
+}
+
+section .top-sec select:hover {
+  background: rgba(165, 79, 58, 1);
+}
+
+section  h3 {
+  font-size: 26px;
+  color: #fff;
+}
+
+section .date {
+  width: 150px;
+}
+
+section  .date h4 {
+  font-size: 26px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* بطاقات الصلاة */
+section .prayer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  background: rgba(192, 88, 62, 0.6);
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 22px;
+  border-radius: 5px;
+  border: 1px solid rgba(215, 215, 215, 0.3);
+  transition: transform 0.3s;
+}
+
+section .prayer:hover {
+  transform: translateX(5px);
+}
+
+/* تحسينات التحميل */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* التجاوب للشاشات الصغيرة */
+@media (max-width: 768px) {
+  section .container {
+    margin-right: 5%;
+    padding: 20px;
+    backdrop-filter: blur(3px); /* تقليل الطمس للأداء */
   }
-  a:hover {
-    color: #747bff;
+
+  section .top-sec {
+    flex-direction: column;
+    gap: 20px;
   }
-  button {
-    background-color: #f9f9f9;
+
+  section .top-sec .date {
+    order: -1; /* نقل التاريخ للأعلى */
+    width: 100%;
+    margin-bottom: 15px;
   }
+
+  section .top-sec .city,
+  section .top-sec .date {
+    width: 100%;
+  }
+
+  section .top-sec select {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  section .top-sec h3,
+  section .top-sec .date h4 {
+    font-size: 22px;
+  }
+
+  section .prayer {
+    padding: 10px 15px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 10px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  section .container {
+    margin-right: 0;
+    padding: 15px;
+  }
+
+  section .top-sec h3,
+  section .top-sec .date h4 {
+    font-size: 20px;
+  }
+}
+/* أنماط السبينر */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.prayer-spinner {
+  width: 70px;
+  height: 70px;
+  border: 5px solid rgba(165, 79, 58, 0.3);
+  border-radius: 50%;
+  border-top-color: #a54f3a;
+  border-bottom-color: #a54f3a;
+  animation: spin 1.5s linear infinite;
+}
+
+.loading-text {
+  color: white;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
